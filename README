@@ -1,0 +1,55 @@
+ActsAsFollowed
+===============
+
+Sets up a polymorphic association between different models and users in order to track users who are "following" a certain resource. You can use this to trigger events such as email notifications, etc. So, if a user is following a Project, or a Conversation, you can create an observer that sends emails based on followships during the lifecycle (create, update, whatever) of the resource.
+
+# set up this table
+class CreateTableFollowships < ActiveRecord::Migration
+  def self.up
+    create_table "followships", :force => true do |t|
+      t.integer  "followed_id"
+      t.string   "followed_type"
+      t.integer  "user_id"  # change if your user model is in a different resource name
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :followships
+  end
+end
+
+
+
+Example
+=======
+
+class Author
+  acts_as_followed
+end
+
+author = Author.new
+author.followships => [] # all of the followships for this author
+
+
+Add this code to the User class (or change the data migration to have a different field than user_id)
+class User
+  acts_as_follower
+end
+
+Given a User and and Author
+u = User.first
+a = Author.first
+
+Methods 
+
+following?
+  u.following?(a) => true
+
+followships
+  u.followships => [] # all followships across resources
+  u.followships.for(a) => followship for the particular resource
+
+
+
+Copyright (c) 2009 [Sarah Gray], released under the MIT license
