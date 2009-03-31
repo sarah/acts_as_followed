@@ -13,8 +13,8 @@ class ActsAsFollowedTest < Test::Unit::TestCase
   
   def setup
     @aslan = celebrities(:aslan)
-    @zak = users(:zak)
-    @flash = users(:flash)
+    @zak = followers(:zak)
+    @flash = followers(:flash)
     @flash_followship = followships(:first)
   end
   
