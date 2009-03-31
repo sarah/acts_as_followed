@@ -8,7 +8,7 @@ module SG
       
       module ClassMethods
         def acts_as_followed
-          has_many :followships, :as => :followed, :dependent => :destroy, :class_name => "::Followship", :include => :user
+          has_many :followships, :as => :followed, :dependent => :destroy, :class_name => "::Followship", :include => :follower
           include SG::Acts::Followed::InstanceMethods
         end
       end
