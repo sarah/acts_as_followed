@@ -4,12 +4,12 @@ class Celebrity < ActiveRecord::Base
   acts_as_followed
 end
 
-class User < ActiveRecord::Base
+class Follower < ActiveRecord::Base
   acts_as_follower
 end
 
 class ActsAsFollowedTest < Test::Unit::TestCase
-  fixtures :users, :celebrities, :followships
+  fixtures :followers, :celebrities, :followships
   
   def setup
     @aslan = celebrities(:aslan)
