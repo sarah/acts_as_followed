@@ -1,0 +1,211 @@
+# Logfile created on Mon Mar 30 18:00:24 -0500 2009 by /
+  [4;36;1mSQL (0.000111)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.000083)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.001129)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.013094)[0m   [0mDROP TABLE `followships`[0m
+  [4;36;1mSQL (0.040389)[0m   [0;1mCREATE TABLE `followships` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `followed_id` int(11), `followed_type` varchar(255), `user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.000733)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.006006)[0m   [0;1mDROP TABLE `users`[0m
+  [4;35;1mSQL (0.049491)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(255)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000925)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.005386)[0m   [0mDROP TABLE `celebrities`[0m
+  [4;36;1mSQL (0.033077)[0m   [0;1mCREATE TABLE `celebrities` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255)) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.001703)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.002578)[0m   [0;1mSELECT version FROM `schema_migrations`[0m
+Unable to load celebrity, underlying cause no such file to load -- celebrity.rb 
+
+ /Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:216:in `load_without_new_constant_marking'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:216:in `load_file'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:355:in `new_constants_in'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:215:in `load_file'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:96:in `require_or_load'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:61:in `depend_on'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:457:in `require_dependency'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:855:in `try_to_load_dependency'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:870:in `require_fixture_classes'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:867:in `each'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:867:in `require_fixture_classes'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:850:in `fixtures'
+/Users/sarah/Sites/canvasband/vendor/plugins/acts_as_followed/test/acts_as_followed_test.rb:12
+  [4;35;1mSQL (0.000254)[0m   [0mBEGIN[0m
+  [4;36;1mCelebrity Load (0.000400)[0m   [0;1mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;35;1mUser Load (0.000250)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mUser Load (0.000201)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000250)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000275)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.followed_id = 1 AND `followships`.followed_type = 'Celebrity') LIMIT 1[0m
+  [4;35;1mUser Load (0.000191)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mSQL (0.000124)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000097)[0m   [0mBEGIN[0m
+  [4;36;1mCelebrity Load (0.000158)[0m   [0;1mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;35;1mUser Load (0.000597)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mUser Load (0.000146)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000160)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;36;1mSQL (0.000735)[0m   [0;1mSELECT count(DISTINCT `followships`.id) AS count_all FROM `followships` LEFT OUTER JOIN `users` ON `users`.id = `followships`.user_id WHERE (`followships`.followed_id = 1 AND `followships`.followed_type = 'Celebrity') [0m
+  [4;35;1mSQL (0.000125)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000084)[0m   [0;1mBEGIN[0m
+  [4;35;1mCelebrity Load (0.000183)[0m   [0mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;36;1mUser Load (0.000142)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;35;1mUser Load (0.000169)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000146)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000187)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.user_id = 1 AND (`followships`.`followed_id` = 1 AND `followships`.`followed_type` = 'Celebrity')) [0m
+  [4;36;1mSQL (0.000109)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000076)[0m   [0mBEGIN[0m
+  [4;36;1mCelebrity Load (0.000217)[0m   [0;1mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;35;1mUser Load (0.000152)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mUser Load (0.000138)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000161)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000183)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.user_id = 2 AND (`followships`.`followed_id` = 1 AND `followships`.`followed_type` = 'Celebrity')) [0m
+  [4;35;1mSQL (0.000111)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000152)[0m   [0;1mBEGIN[0m
+  [4;35;1mCelebrity Load (0.000150)[0m   [0mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;36;1mUser Load (0.000144)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;35;1mUser Load (0.000139)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000148)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000175)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.user_id = 2 AND (`followships`.`followed_id` = 1 AND `followships`.`followed_type` = 'Celebrity')) [0m
+  [4;36;1mSQL (0.000107)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000106)[0m   [0mBEGIN[0m
+  [4;36;1mCelebrity Load (0.000152)[0m   [0;1mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;35;1mUser Load (0.000144)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mUser Load (0.000136)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000148)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000217)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.user_id = 1 AND (`followships`.`followed_id` = 1 AND `followships`.`followed_type` = 'Celebrity')) [0m
+  [4;35;1mSQL (0.000111)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000109)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.000123)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.000577)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.020084)[0m   [0mDROP TABLE `followships`[0m
+  [4;36;1mSQL (0.040991)[0m   [0;1mCREATE TABLE `followships` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `followed_id` int(11), `followed_type` varchar(255), `user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.001506)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.004601)[0m   [0;1mDROP TABLE `users`[0m
+  [4;35;1mSQL (0.032702)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(255)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.001116)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.007458)[0m   [0mDROP TABLE `celebrities`[0m
+  [4;36;1mSQL (0.039512)[0m   [0;1mCREATE TABLE `celebrities` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255)) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.003970)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.000385)[0m   [0;1mSELECT version FROM `schema_migrations`[0m
+Unable to load celebrity, underlying cause no such file to load -- celebrity.rb 
+
+ /Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:216:in `load_without_new_constant_marking'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:216:in `load_file'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:355:in `new_constants_in'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:215:in `load_file'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:96:in `require_or_load'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:61:in `depend_on'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:457:in `require_dependency'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:855:in `try_to_load_dependency'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:870:in `require_fixture_classes'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:867:in `each'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:867:in `require_fixture_classes'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:850:in `fixtures'
+/Users/sarah/Sites/canvasband/vendor/plugins/acts_as_followed/test/acts_as_followed_test.rb:12
+  [4;35;1mSQL (0.000188)[0m   [0mBEGIN[0m
+  [4;36;1mCelebrity Load (0.000345)[0m   [0;1mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;35;1mUser Load (0.001418)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mUser Load (0.000187)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000208)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;36;1mSQL (0.000110)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000096)[0m   [0mBEGIN[0m
+  [4;36;1mCelebrity Load (0.000194)[0m   [0;1mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;35;1mUser Load (0.000138)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mUser Load (0.000135)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000180)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;36;1mSQL (0.000121)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000101)[0m   [0mBEGIN[0m
+  [4;36;1mCelebrity Load (0.000165)[0m   [0;1mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;35;1mUser Load (0.000151)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mUser Load (0.000141)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000149)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000229)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.user_id = 1 AND (`followships`.`followed_id` = 1 AND `followships`.`followed_type` = 'Celebrity')) [0m
+  [4;35;1mSQL (0.000121)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000082)[0m   [0;1mBEGIN[0m
+  [4;35;1mCelebrity Load (0.000149)[0m   [0mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;36;1mUser Load (0.000142)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;35;1mUser Load (0.000136)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000154)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000174)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.user_id = 2 AND (`followships`.`followed_id` = 1 AND `followships`.`followed_type` = 'Celebrity')) [0m
+  [4;36;1mSQL (0.000116)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000116)[0m   [0mBEGIN[0m
+  [4;36;1mCelebrity Load (0.000142)[0m   [0;1mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;35;1mUser Load (0.000148)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mUser Load (0.000150)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000150)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000182)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.user_id = 2 AND (`followships`.`followed_id` = 1 AND `followships`.`followed_type` = 'Celebrity')) [0m
+  [4;35;1mSQL (0.000094)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000105)[0m   [0;1mBEGIN[0m
+  [4;35;1mCelebrity Load (0.000193)[0m   [0mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;36;1mUser Load (0.000142)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;35;1mUser Load (0.000137)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000162)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000180)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.user_id = 1 AND (`followships`.`followed_id` = 1 AND `followships`.`followed_type` = 'Celebrity')) [0m
+  [4;36;1mSQL (0.000113)[0m   [0;1mROLLBACK[0m
+  [4;36;1mSQL (0.000112)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.000086)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.000652)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.020600)[0m   [0mDROP TABLE `followships`[0m
+  [4;36;1mSQL (0.032356)[0m   [0;1mCREATE TABLE `followships` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `followed_id` int(11), `followed_type` varchar(255), `user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.002548)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.004624)[0m   [0;1mDROP TABLE `users`[0m
+  [4;35;1mSQL (0.032589)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(255)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.001258)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.006625)[0m   [0mDROP TABLE `celebrities`[0m
+  [4;36;1mSQL (0.040914)[0m   [0;1mCREATE TABLE `celebrities` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255)) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.001396)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.000926)[0m   [0;1mSELECT version FROM `schema_migrations`[0m
+Unable to load celebrity, underlying cause no such file to load -- celebrity.rb 
+
+ /Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:216:in `load_without_new_constant_marking'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:216:in `load_file'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:355:in `new_constants_in'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:215:in `load_file'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:96:in `require_or_load'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:61:in `depend_on'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/../../activesupport/lib/active_support/dependencies.rb:457:in `require_dependency'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:855:in `try_to_load_dependency'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:870:in `require_fixture_classes'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:867:in `each'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:867:in `require_fixture_classes'
+/Users/sarah/Sites/canvasband/vendor/rails/activerecord/lib/active_record/fixtures.rb:850:in `fixtures'
+/Users/sarah/Sites/canvasband/vendor/plugins/acts_as_followed/test/acts_as_followed_test.rb:12
+  [4;35;1mSQL (0.000265)[0m   [0mBEGIN[0m
+  [4;36;1mCelebrity Load (0.000411)[0m   [0;1mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;35;1mUser Load (0.000258)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mUser Load (0.000270)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000309)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000339)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.followed_id = 1 AND `followships`.followed_type = 'Celebrity') LIMIT 1[0m
+  [4;35;1mUser Load (0.000265)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mSQL (0.000207)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000127)[0m   [0mBEGIN[0m
+  [4;36;1mCelebrity Load (0.000202)[0m   [0;1mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;35;1mUser Load (0.000130)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mUser Load (0.000133)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000144)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;36;1mSQL (0.000343)[0m   [0;1mSELECT count(DISTINCT `followships`.id) AS count_all FROM `followships` LEFT OUTER JOIN `users` ON `users`.id = `followships`.user_id WHERE (`followships`.followed_id = 1 AND `followships`.followed_type = 'Celebrity') [0m
+  [4;35;1mSQL (0.000115)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000115)[0m   [0;1mBEGIN[0m
+  [4;35;1mCelebrity Load (0.000170)[0m   [0mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;36;1mUser Load (0.000146)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;35;1mUser Load (0.000170)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000201)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000247)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.user_id = 1 AND (`followships`.`followed_id` = 1 AND `followships`.`followed_type` = 'Celebrity')) [0m
+  [4;36;1mSQL (0.000112)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000094)[0m   [0mBEGIN[0m
+  [4;36;1mCelebrity Load (0.000153)[0m   [0;1mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;35;1mUser Load (0.000141)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mUser Load (0.000151)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000159)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000181)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.user_id = 2 AND (`followships`.`followed_id` = 1 AND `followships`.`followed_type` = 'Celebrity')) [0m
+  [4;35;1mSQL (0.000109)[0m   [0mROLLBACK[0m
+  [4;36;1mSQL (0.000103)[0m   [0;1mBEGIN[0m
+  [4;35;1mCelebrity Load (0.000152)[0m   [0mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;36;1mUser Load (0.000158)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;35;1mUser Load (0.000152)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000174)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000202)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.user_id = 2 AND (`followships`.`followed_id` = 1 AND `followships`.`followed_type` = 'Celebrity')) [0m
+  [4;36;1mSQL (0.000190)[0m   [0;1mROLLBACK[0m
+  [4;35;1mSQL (0.000081)[0m   [0mBEGIN[0m
+  [4;36;1mCelebrity Load (0.000175)[0m   [0;1mSELECT * FROM `celebrities` WHERE (`celebrities`.`id` = 1) [0m
+  [4;35;1mUser Load (0.000195)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 2) [0m
+  [4;36;1mUser Load (0.000170)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 1) [0m
+  [4;35;1mFollowship Load (0.000136)[0m   [0mSELECT * FROM `followships` WHERE (`followships`.`id` = 1) [0m
+  [4;36;1mFollowship Load (0.000173)[0m   [0;1mSELECT * FROM `followships` WHERE (`followships`.user_id = 1 AND (`followships`.`followed_id` = 1 AND `followships`.`followed_type` = 'Celebrity')) [0m
+  [4;35;1mSQL (0.000125)[0m   [0mROLLBACK[0m
