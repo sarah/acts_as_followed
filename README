@@ -9,7 +9,7 @@ class CreateTableFollowships < ActiveRecord::Migration
     create_table "followships", :force => true do |t|
       t.integer  "followed_id"
       t.string   "followed_type"
-      t.integer  "user_id"  # change if your user model is in a different resource name
+      t.integer  "follower_id"  # set up to take a User object in the association
       t.timestamps
     end
   end
@@ -37,18 +37,18 @@ class User
   acts_as_follower
 end
 
-Given a User and and Author
-u = User.first
-a = Author.first
+Given a Follower and a Celebrity (whichever classes you like)
+follower = User.first
+celebrity = Celebrity.first
 
 Methods 
 
 following?
-  u.following?(a) => true
+  follower.following?(celebrity) => true
 
 followships
-  u.followships => [] # all followships across resources
-  u.followships.for(a) => followship for the particular resource
+  follower.followships => [] # all followships across resources
+  follower.followships.for(celebrity) => followship for the particular resource
 
 
 

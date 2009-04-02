@@ -40,7 +40,6 @@ module SG
           end
           include SG::Acts::Follower::InstanceMethods
         end
-        
       end
       
       module InstanceMethods
@@ -54,5 +53,3 @@ end
 
 ActiveRecord::Base.send(:include, SG::Acts::Followed)
 ActiveRecord::Base.send(:include, SG::Acts::Follower)
-
-
