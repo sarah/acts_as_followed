@@ -1,3 +1,30 @@
+# class User
+#   #  acts_as_follower
+#   has_many :followships, :as=>:follower 
+# end
+# 
+# class Comment
+#   #  acts_as_followed
+#   has_many :followships, :as=>:followed 
+# end
+# 
+# class Minion
+#   #  acts_as_follower
+#   has_many :followships, :as=>:follower 
+# end
+# 
+# class Lord
+#   #  acts_as_followed
+#   has_many :followships, :as=>:followed
+# end
+# 
+# class Followship
+#   belongs_to :followed, :polymorphic => true
+#   belongs_to :follower, :polymorphic => true
+# end
+
+
+
 # ActsAsFollowed
 module SG
   module Acts #:nodoc
@@ -8,7 +35,7 @@ module SG
       
       module ClassMethods
         def acts_as_followed
-          has_many :followships, :as => :followed, :dependent => :destroy, :class_name => "::Followship", :include => :follower
+          has_many :followships, :as => :followed, :dependent => :destroy, :class_name => "::Followship"
           include SG::Acts::Followed::InstanceMethods
         end
       end
@@ -18,7 +45,6 @@ module SG
           followships << followship
         end
       end
-      
     end
   end
 end
@@ -33,7 +59,7 @@ module SG
       
       module ClassMethods
         def acts_as_follower
-          has_many :followships do
+          has_many :followships, :as => :follower, :dependent => :destroy, :class_name => "::Followship" do
             def for(resource)
               find(:all, :conditions => {:followed_type => resource.class.to_s, :followed_id => resource.id}) 
             end

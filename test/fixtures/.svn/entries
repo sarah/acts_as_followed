@@ -1,0 +1,52 @@
+8
+
+dir
+495
+svn+ssh://sarah@canvasband/var/lib/svn/canvasband/trunk/vendor/plugins/acts_as_followed/test/fixtures
+svn+ssh://sarah@canvasband/var/lib/svn/canvasband
+
+
+
+2009-04-02T04:21:01.145731Z
+495
+sarah
+
+
+svn:special svn:externals svn:needs-lock
+
+followships.yml
+file
+
+
+
+
+2009-03-31T14:21:18.000000Z
+637526947582e27ba1965f8cb961d875
+2009-04-02T04:21:01.145731Z
+495
+sarah
+
+celebrities.yml
+file
+
+
+
+
+2009-03-31T14:21:18.000000Z
+a4594f5d5efd2d60092a5e283c02394a
+2009-04-02T04:21:01.145731Z
+495
+sarah
+
+followers.yml
+file
+
+
+
+
+2009-03-31T14:21:18.000000Z
+5db6fe682c7b2c7f6d7c5727c6dab219
+2009-04-02T04:21:01.145731Z
+495
+sarah
+

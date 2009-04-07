@@ -4,6 +4,7 @@ ActiveRecord::Schema.define(:version => 2) do
     t.integer  "followed_id"
     t.string   "followed_type"
     t.integer  "follower_id"  
+    t.string  "follower_type"  
     t.timestamps
   end
 
@@ -15,4 +16,11 @@ ActiveRecord::Schema.define(:version => 2) do
     t.string "name"
   end
 
+  create_table "users", :force => true do |t|
+    t.string "login"
+  end
+  
+  create_table "comments", :force => true do |t|
+    t.string "content"
+  end
 end

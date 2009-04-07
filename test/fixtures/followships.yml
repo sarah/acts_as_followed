@@ -1,5 +1,20 @@
 first:
   id: 1
   follower_id: 1
+  follower_type: Follower
+  followed_id: 1
+  followed_type: Celebrity
+
+second:
+  id: 2
+  follower_id: 1
+  follower_type: User
+  followed_id: 1
+  followed_type: Comment
+
+third:
+  id: 3
+  follower_id: 1
+  follower_type: User
   followed_id: 1
   followed_type: Celebrity
