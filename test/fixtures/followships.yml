@@ -1,3 +1,4 @@
+# Typical: one person being "fan" to another
 first:
   id: 1
   follower_id: 1
@@ -5,6 +6,7 @@ first:
   followed_id: 1
   followed_type: Celebrity
 
+# Typical: one person keeping track of a resource, like a comment
 second:
   id: 2
   follower_id: 1
@@ -12,9 +14,27 @@ second:
   followed_id: 1
   followed_type: Comment
 
+# Same as the first, but demonstrating polymorphism
 third:
   id: 3
   follower_id: 1
   follower_type: User
   followed_id: 1
   followed_type: Celebrity
+  
+  
+# Fourth and fifth; reciprocal examples of two users following each other. In this case, if you look at the 
+# fixture, Flora is following Lucy; *and*, Lucy is following Flora.  Mutual Admiration Society. 
+fourth:
+  id: 4
+  follower_id: 1
+  follower_type: User
+  followed_id: 2
+  followed_type: User
+  
+fifth:
+  id: 5
+  follower_id: 2
+  follower_type: User
+  followed_id: 1
+  followed_type: User

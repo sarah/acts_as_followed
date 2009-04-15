@@ -1,16 +1,24 @@
-ActsAsFollowed
-===============
+<h3>ActsAsFollowed</h3>
+<h3>===============</h3>
 
-Sets up a polymorphic association between different models and users in order to track users who are "following" a certain resource. You can use this to trigger events such as email notifications, etc. So, if a user is following a Project, or a Conversation, you can create an observer that sends emails based on followships during the lifecycle (create, update, whatever) of the resource.
+<strong>Revised, April 14th.</strong> 
 
-# set up this table
+I've made some changes to how this works so that followships can work as a two-way street: i.e. followers *and* followeds are both polymorphic.  In doing so, I changed the name of the associations, so that if you are acts_as_followed, your association proxy is named *followerships* and if you are acts_as_follower, your association proxy is named *followeeships*. This allows two users to follow each other without a namespace clash on the association proxy (previously, both were "followships", so you couldn't follow each other).  In other words, I broke the way it was before. Also, the migration has changed to add *follower_type*. 
+
+<h3>Description</h3>
+
+ActsAsFollowed sets up a polymorphic association between different models in order to track users (or resources) who are "following" a certain resource. You can use this to trigger events such as email notifications, etc. So, if a user is following a Project, or a Comment, or another User, you can create an observer that sends emails based on followships during the lifecycle (create, update, whatever) of the resource they are following.
+
+<h3>Migration</h3>
+# Create this table in your migrations
 class CreateTableFollowships < ActiveRecord::Migration
   def self.up
-    create_table "followships", :force => true do |t|
-      t.integer  "followed_id"
-      t.string   "followed_type"
-      t.integer  "follower_id"  # set up to take a User object in the association
-      t.timestamps
+   create_table "followships", :force => true do |t|     
+     t.integer  "followed_id"
+     t.string   "followed_type"
+     t.integer  "follower_id"  
+     t.string   "follower_type"  
+     t.timestamps
     end
   end
 
@@ -20,36 +28,92 @@ class CreateTableFollowships < ActiveRecord::Migration
 end
 
 
+<h3>Examples</h3>
 
-Example
-=======
+<h4>One</h4>
+A model can be *acts_as_followed*, *acts_as_follower*, or both. 
 
-class Author
+Since the Internet was invented so that we can have a reliable, 24-hour cat-channel, let's use our favorite feline to demonstrate:
+
+class Lion
   acts_as_followed
 end
 
-author = Author.new
-author.followships => [] # all of the followships for this author
-
-
-Add this code to the User class (or change the data migration to have a different field than user_id)
-class User
+class HouseCat
+  acts_as_followed
   acts_as_follower
 end
 
+So, if you have two house-cats, Lucy and Flora, who admire each other:
+
+lucy  = HouseCat.new
+flora = HouseCat.new
+
+You can add a followership to each of them, referencing the other
+
+lucy.start_following!(flora)
+flora.start_following!(lucy)
+
+And, voila, a reciprocal relationship of feline adoration, resulting in a lot of tail-chasing: 
+
+lucy.following?(flora) => true
+flora.following?(lucy) => true
+
+If lucy also reads her C.S. Lewis, she may have another hero:
+
+aslan = Lion.new
+lucy.start_following!(aslan)
+lucy.following?(aslan) => true
+
+In this case, aslan cannot follow lucy because aslan is acts_as_followed, but not acts_as_follower. 
+
+<h4>Two</h4>
+This can also be used for non-cat (non person-to-person) followships. For instance, a user can follow a Comment, Project, Event, etc -- anything that you want to give updates on. The updates aren't a part of this plugin, you handle those depending on your needs. Simple Example 
+
+class Discussion
+  acts_as_followed
+end
+
+class User
+ acts_as_follower
+end
+
+user = User.new
+discussion = Discussion.new
+
+user.start_following!(discussion)
+discussion.followerships => [user.followeeships.first] # all of the followeeships for this discussion
+user.followeeships => [discussion.followerships.first] # all of the followerships for this user
+
+<h4>Methods</h4>
+
 Given a Follower and a Celebrity (whichever classes you like)
-follower = User.first
+follower  = User.first
 celebrity = Celebrity.first
 
-Methods 
+*acts_as_follower*
 
-following?
-  follower.following?(celebrity) => true
+  start_following!
+    follower.start_following!(celebrity)
+  
+  following?
+    follower.following?(celebrity) => true
 
-followships
-  follower.followships => [] # all followships across resources
-  follower.followships.for(celebrity) => followship for the particular resource
+  followeeships
+    followed.followeeships => [] # all followeeships 
+
+  followeeships.for(celebrity)
+      followed.followeeships => [] # the array of the followeeships for that resource. (*Note* will add uniqueness scoping so it can only be one item long)
+  
+  
+*acts_as_followed*
+
+  celebrity.followerships.for(celebrity) => followship for the particular resource
 
 
-
+<h3>Next things I want to add</h3>
+  * Uniqueness scoping on followships
+  * More convenience methods for accessing the person/thing you are following/being followed by
+  
+  
 Copyright (c) 2009 [Sarah Gray], released under the MIT license

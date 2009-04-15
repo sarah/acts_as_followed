@@ -5,4 +5,5 @@ class Followship < ActiveRecord::Base
   belongs_to :follower, :polymorphic => true
   
   validates_presence_of :follower, :followed
+
 end
